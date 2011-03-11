@@ -5,7 +5,7 @@
 		<Option title="projection_mapping" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/ofxMSAInteractiveObject/src/;addons/ofxSimpleGuiToo/src/Controls/;addons/ofxSimpleGuiToo/src/;addons/ofxXmlSettings/libs/;addons/ofxXmlSettings/src/;" />
+		<Option virtualFolders="addons/;src/;addons/ofxMSAInteractiveObject/src/;addons/ofxSimpleGuiToo/src/Controls/;addons/ofxSimpleGuiToo/src/;addons/ofxXmlSettings/libs/;addons/ofxXmlSettings/src/;addons/ofxFenster/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/$(PROJECT_NAME)_debug" prefix_auto="1" extension_auto="1" />
@@ -71,6 +71,7 @@
 			<Add directory="../../../addons/ofxSimpleGuiToo/src/" />
 			<Add directory="../../../addons/ofxSimpleGuiToo/src/Controls/" />
 			<Add directory="../../../addons/ofxMSAInteractiveObject/src/" />
+			<Add directory="../../../addons/ofxFenster" />
 		</Compiler>
 		<Linker>
 			<Add library="fmodex" />
@@ -100,6 +101,12 @@
 			<Add after="#" />
 			<Add after="cp -r ../../../export/linux64/libs $(PROJECT_DIR)bin/" />
 		</ExtraCommands>
+		<Unit filename="../../../addons/ofxFenster/ofxFenster.cpp">
+			<Option virtualFolder="addons/ofxFenster/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxFenster/ofxFenster.h">
+			<Option virtualFolder="addons/ofxFenster/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxMSAInteractiveObject/src/ofxMSAInteractiveObject.cpp">
 			<Option virtualFolder="addons/ofxMSAInteractiveObject/src" />
 		</Unit>

@@ -277,14 +277,85 @@ void testApp::draw()
         ofSetColor(0xFFFFFF);
         ttf.drawString("active quad: "+ofToString(activeQuad), 30, ofGetHeight()-25);
     }
+}
+
+
+void testApp::fensterUpdate() {}
+
+void testApp::fensterDraw() {
+    fenster->toContext();
 
    // draws gui
    if (isSetup)
    {
    gui.draw();
    }
+ fenster->toMainContext();
+}
+
+void testApp::fensterKeyPressed(int key)
+{
+
+    // adds a new quad in the middle of the screen
+    if ( key =='a' )
+    {
+        if (isSetup)
+        {
+            if (nOfQuads < 36)
+            {
+                quads[nOfQuads].setup(0.25,0.25,0.75,0.25,0.75,0.75,0.25,0.75, imgFiles, videoFiles, slideshowFolders);
+                quads[nOfQuads].quadNumber = nOfQuads;
+                layers[nOfQuads] = nOfQuads;
+                quads[nOfQuads].layer = nOfQuads;
+                activeQuad = nOfQuads;
+                ++nOfQuads;
+                gui.setPage((activeQuad*3)+2);
+            }
+        }
+    }
+
+
+
+    // activates next quad
+    if ( key =='>' )
+    {
+        if (isSetup)
+        {
+            activeQuad += 1;
+            if (activeQuad > nOfQuads-1)
+            {
+                activeQuad = 0;
+            }
+        }
+    gui.setPage((activeQuad*3)+2);
+    }
+
+    // activates prev quad
+    if ( key =='<' )
+    {
+        if (isSetup)
+        {
+            activeQuad -= 1;
+            if (activeQuad < 0)
+            {
+                activeQuad = nOfQuads-1;
+            }
+        }
+    gui.setPage((activeQuad*3)+2);
+    }
+
+
 
 }
+
+void testApp::fensterKeyReleased(int key) {}
+void testApp::fensterMouseMoved(int x, int y ) {}
+void testApp::fensterMouseDragged(int x, int y, int button) {}
+void testApp::fensterMousePressed(int x, int y, int button) {}
+void testApp::fensterMouseReleased(int x, int y, int button) {}
+void testApp::fensterWindowResized(int w, int h) {}
+
+
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)

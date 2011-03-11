@@ -8,9 +8,10 @@
 #include "ball.h"
 #include "quad.h"
 #include "ofxXmlSettings.h"
+#include "ofxFenster.h"
 
 
-class testApp : public ofSimpleApp
+class testApp : public ofBaseApp, public ofxFensterListener
 {
 
 public:
@@ -18,6 +19,9 @@ public:
     void setup();
     void update();
     void draw();
+
+    void fensterDraw();
+	void fensterUpdate();
 
 
     void keyPressed(int key);
@@ -60,7 +64,13 @@ public:
     void setXml();
     void getXml();
 
-
+	void fensterKeyPressed  (int key);
+	void fensterKeyReleased(int key);
+	void fensterMouseMoved(int x, int y );
+	void fensterMouseDragged(int x, int y, int button);
+	void fensterMousePressed(int x, int y, int button);
+	void fensterMouseReleased(int x, int y, int button);
+	void fensterWindowResized(int w, int h);
 
 
 };
