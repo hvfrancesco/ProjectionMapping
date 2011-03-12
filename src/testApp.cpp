@@ -35,6 +35,8 @@ int getdir (string dir, vector<string> &files)
 //--------------------------------------------------------------
 void testApp::setup()
 {
+
+
     //we run at 60 fps!
     ofSetVerticalSync(true);
 
@@ -203,6 +205,25 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
+
+
+}
+
+//--------------------------------------------------------------
+void testApp::draw()
+{
+
+  // draws gui
+   if (isSetup)
+   {
+   gui.draw();
+   }
+
+}
+
+
+void testApp::fensterUpdate() {
+
     // grabs video frame from camera and passes pixels to quads
     camGrabber.grabFrame();
     if (camGrabber.isFrameNew()){
@@ -240,13 +261,15 @@ void testApp::update()
         }
     }
 
+
 }
 
-//--------------------------------------------------------------
-void testApp::draw()
-{
+void testApp::fensterDraw() {
 
-    // in setup mode sets active quad border to be white
+fenster->toContext();
+
+
+        // in setup mode sets active quad border to be white
     if (isSetup)
     {
         quads[activeQuad].borderColor = 0xFFFFFF;
@@ -277,20 +300,13 @@ void testApp::draw()
         ofSetColor(0xFFFFFF);
         ttf.drawString("active quad: "+ofToString(activeQuad), 30, ofGetHeight()-25);
     }
-}
 
 
-void testApp::fensterUpdate() {}
+fenster->toMainContext();
 
-void testApp::fensterDraw() {
-    fenster->toContext();
 
-   // draws gui
-   if (isSetup)
-   {
-   gui.draw();
-   }
- fenster->toMainContext();
+
+
 }
 
 void testApp::fensterKeyPressed(int key)
@@ -350,9 +366,9 @@ void testApp::fensterKeyPressed(int key)
 
 void testApp::fensterKeyReleased(int key) {}
 void testApp::fensterMouseMoved(int x, int y ) {}
-void testApp::fensterMouseDragged(int x, int y, int button) {}
-void testApp::fensterMousePressed(int x, int y, int button) {}
-void testApp::fensterMouseReleased(int x, int y, int button) {}
+//void testApp::fensterMouseDragged(int x, int y, int button) {}
+//void testApp::fensterMousePressed(int x, int y, int button) {}
+//void testApp::fensterMouseReleased(int x, int y, int button) {}
 void testApp::fensterWindowResized(int w, int h) {}
 
 
