@@ -204,10 +204,10 @@
 			<Option virtualFolder="addons/ofxSimpleGuiToo/src" />
 		</Unit>
 		<Unit filename="../../../addons/ofxSimpleGuiToo/src/ofxSimpleGuiToo.cpp">
-			<Option virtualFolder="addons/ofxSimpleGuiToo/src" />
+			<Option virtualFolder="addons/ofxSimpleGuiToo/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxSimpleGuiToo/src/ofxSimpleGuiToo.h">
-			<Option virtualFolder="addons/ofxSimpleGuiToo/src" />
+			<Option virtualFolder="addons/ofxSimpleGuiToo/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">
 			<Option virtualFolder="addons/ofxXmlSettings/libs" />
