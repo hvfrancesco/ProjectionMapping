@@ -32,6 +32,7 @@ public:
     void mouseReleased();
     int whichCorner;
     ofTrueTypeFont ttf;
+    ofTrueTypeFont ttf1;
 
     quad quads[36];
     int layers[36];
@@ -67,9 +68,9 @@ public:
 	void fensterKeyPressed  (int key);
 	void fensterKeyReleased(int key);
 	void fensterMouseMoved(int x, int y );
-	//void fensterMouseDragged(int x, int y, int button);
-	//void fensterMousePressed(int x, int y, int button);
-	//void fensterMouseReleased(int x, int y, int button);
+	void fensterMouseDragged(int x, int y, int button);
+	void fensterMousePressed(int x, int y, int button);
+	void fensterMouseReleased(int x, int y, int button);
 	void fensterWindowResized(int w, int h);
 
 

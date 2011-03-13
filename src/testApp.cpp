@@ -68,8 +68,10 @@ void testApp::setup()
         slideshows[i]= slideshowFolders[i];
     }
 
-
+    fenster->toContext();
     ttf.loadFont("type/frabk.ttf", 11);
+    fenster->toMainContext();
+    ttf1.loadFont("type/frabk.ttf", 11);
     // set border color for quads in setup mode
     borderColor = 0x666666;
     // starts in quads setup mode
@@ -80,11 +82,13 @@ void testApp::setup()
     bGui = 1;
     ofSetWindowShape(800, 600);
 
+fenster->toContext();
     // camera stuff
     camWidth = 640;	// try to grab at this size.
     camHeight = 480;
     camGrabber.setVerbose(true);
     camGrabber.initGrabber(camWidth,camHeight);
+
 
     // texture for snapshot background
     snapshotTexture.allocate(camWidth,camHeight, GL_RGB);
@@ -105,6 +109,7 @@ void testApp::setup()
     quads[2].quadNumber = 2;
     quads[3].setup(0.5,0.5,1.0,0.5,1.0,1.0,0.5,1.0,imgFiles, videoFiles, slideshowFolders);
     quads[3].quadNumber = 3;
+    fenster->toMainContext();
     // define last one as active quad
     activeQuad = 3;
     // number of total quads, to be modified later at each quad insertion
@@ -224,6 +229,7 @@ void testApp::draw()
 
 void testApp::fensterUpdate() {
 
+fenster->toContext();
     // grabs video frame from camera and passes pixels to quads
     camGrabber.grabFrame();
     if (camGrabber.isFrameNew()){
@@ -261,6 +267,7 @@ void testApp::fensterUpdate() {
         }
     }
 
+fenster->toMainContext();
 
 }
 
@@ -366,9 +373,71 @@ void testApp::fensterKeyPressed(int key)
 
 void testApp::fensterKeyReleased(int key) {}
 void testApp::fensterMouseMoved(int x, int y ) {}
-//void testApp::fensterMouseDragged(int x, int y, int button) {}
-//void testApp::fensterMousePressed(int x, int y, int button) {}
-//void testApp::fensterMouseReleased(int x, int y, int button) {}
+void testApp::fensterMouseDragged(int x, int y, int button) {
+      if (isSetup && !bGui)
+    {
+
+        float scaleX = (float)x / ofGetWidth();
+        float scaleY = (float)y / ofGetHeight();
+
+        if(whichCorner >= 0)
+        {
+            quads[activeQuad].corners[whichCorner].x = scaleX;
+            quads[activeQuad].corners[whichCorner].y = scaleY;
+        }
+
+    }
+}
+void testApp::fensterMousePressed(int x, int y, int button) {
+     if (isSetup && !bGui)
+    {
+        float smallestDist = 1.0;
+        whichCorner = -1;
+
+        for(int i = 0; i < 4; i++)
+        {
+            float distx = quads[activeQuad].corners[i].x - (float)x/ofGetWidth();
+            float disty = quads[activeQuad].corners[i].y - (float)y/ofGetHeight();
+            float dist  = sqrt( distx * distx + disty * disty);
+
+            if(dist < smallestDist && dist < 0.1)
+            {
+                whichCorner = i;
+                smallestDist = dist;
+            }
+        }
+    }
+}
+void testApp::fensterMouseReleased(int x, int y, int button) {
+
+   if (whichCorner >= 0) {
+        // snap detection for near quads
+        float smallestDist = 1.0;
+        int snapQuad = -1;
+        int snapCorner = -1;
+        for (int i = 0; i < 36; i++) {
+            if ( i != activeQuad && quads[i].initialized) {
+                for(int j = 0; j < 4; j++) {
+                    float distx = quads[activeQuad].corners[whichCorner].x - quads[i].corners[j].x;
+                    float disty = quads[activeQuad].corners[whichCorner].y - quads[i].corners[j].y;
+                    float dist = sqrt( distx * distx + disty * disty);
+                    // to tune snapping change dist value inside next if statement
+                    if (dist < smallestDist && dist < 0.0075) {
+                        snapQuad = i;
+                        snapCorner = j;
+                        smallestDist = dist;
+                    }
+                }
+            }
+        }
+        if (snapQuad >= 0 && snapCorner >= 0) {
+            quads[activeQuad].corners[whichCorner].x = quads[snapQuad].corners[snapCorner].x;
+            quads[activeQuad].corners[whichCorner].y = quads[snapQuad].corners[snapCorner].y;
+    }
+    }
+    whichCorner = -1;
+
+}
 void testApp::fensterWindowResized(int w, int h) {}
 
 
