@@ -219,10 +219,9 @@ void testApp::draw()
 {
 
   // draws gui
-   if (isSetup)
-   {
+
    gui.draw();
-   }
+
 
 }
 
@@ -368,13 +367,71 @@ void testApp::fensterKeyPressed(int key)
     }
 
 
+    if(key == 'f')
+    {
+
+       fenster->toggleFullscreen();
+    }
+
+
+    if(key == 'g')
+    {
+    bGui = !bGui;
+    }
+
+    // toggles setup mode
+    if ( key ==' ' )
+    {
+        if (isSetup)
+        {
+            isSetup = False;
+            for(int i = 0; i < 36; i++)
+            {
+                if (quads[i].initialized)
+                {
+                    quads[i].isSetup = False;
+                }
+            }
+        }
+        else
+        {
+            isSetup = True;
+            for(int i = 0; i < 36; i++)
+            {
+                if (quads[i].initialized)
+                {
+                    quads[i].isSetup = True;
+                }
+            }
+        }
+    }
+
 
 }
 
 void testApp::fensterKeyReleased(int key) {}
-void testApp::fensterMouseMoved(int x, int y ) {}
+void testApp::fensterMouseMoved(int x, int y ) {
+
+if (isSetup)
+    {
+
+        float scaleX = (float)x / ofGetWidth();
+        float scaleY = (float)y / ofGetHeight();
+
+        if(whichCorner >= 0)
+        {
+            quads[activeQuad].corners[whichCorner].x = scaleX;
+            quads[activeQuad].corners[whichCorner].y = scaleY;
+        }
+
+    }
+
+}
+
+
+
 void testApp::fensterMouseDragged(int x, int y, int button) {
-      if (isSetup && !bGui)
+      if (isSetup)
     {
 
         float scaleX = (float)x / ofGetWidth();
@@ -389,7 +446,7 @@ void testApp::fensterMouseDragged(int x, int y, int button) {
     }
 }
 void testApp::fensterMousePressed(int x, int y, int button) {
-     if (isSetup && !bGui)
+     if (isSetup)
     {
         float smallestDist = 1.0;
         whichCorner = -1;
@@ -599,7 +656,9 @@ void testApp::keyPressed(int key)
         {
             if (nOfQuads < 36)
             {
+                fenster->toContext();
                 quads[nOfQuads].setup(0.25,0.25,0.75,0.25,0.75,0.75,0.25,0.75, imgFiles, videoFiles, slideshowFolders);
+                fenster->toMainContext();
                 quads[nOfQuads].quadNumber = nOfQuads;
                 layers[nOfQuads] = nOfQuads;
                 quads[nOfQuads].layer = nOfQuads;
@@ -639,29 +698,12 @@ void testApp::keyPressed(int key)
 
     // toggles fullscreen mode
     if(key == 'f')
-    {
-
-        bFullscreen = !bFullscreen;
-
-        if(!bFullscreen)
-        {
-            ofSetWindowShape(800, 600);
-            ofSetFullscreen(false);
-            // figure out how to put the window in the center:
-            int screenW = ofGetScreenWidth();
-            int screenH = ofGetScreenHeight();
-            ofSetWindowPosition(screenW/2-800/2, screenH/2-600/2);
-        }
-        else if(bFullscreen == 1)
-        {
-            ofSetFullscreen(true);
-        }
-    }
+    { fenster->toggleFullscreen();    }
 
     // toggles gui
     if(key == 'g')
     {
-    gui.toggleDraw();
+    //gui.toggleDraw();
     bGui = !bGui;
     }
 
@@ -720,73 +762,19 @@ void testApp::mouseMoved(int x, int y )
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button)
 {
-    if (isSetup && !bGui)
-    {
 
-        float scaleX = (float)x / ofGetWidth();
-        float scaleY = (float)y / ofGetHeight();
-
-        if(whichCorner >= 0)
-        {
-            quads[activeQuad].corners[whichCorner].x = scaleX;
-            quads[activeQuad].corners[whichCorner].y = scaleY;
-        }
-
-    }
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button)
 {
-    if (isSetup && !bGui)
-    {
-        float smallestDist = 1.0;
-        whichCorner = -1;
 
-        for(int i = 0; i < 4; i++)
-        {
-            float distx = quads[activeQuad].corners[i].x - (float)x/ofGetWidth();
-            float disty = quads[activeQuad].corners[i].y - (float)y/ofGetHeight();
-            float dist  = sqrt( distx * distx + disty * disty);
-
-            if(dist < smallestDist && dist < 0.1)
-            {
-                whichCorner = i;
-                smallestDist = dist;
-            }
-        }
-    }
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased()
 {
-    if (whichCorner >= 0) {
-        // snap detection for near quads
-        float smallestDist = 1.0;
-        int snapQuad = -1;
-        int snapCorner = -1;
-        for (int i = 0; i < 36; i++) {
-            if ( i != activeQuad && quads[i].initialized) {
-                for(int j = 0; j < 4; j++) {
-                    float distx = quads[activeQuad].corners[whichCorner].x - quads[i].corners[j].x;
-                    float disty = quads[activeQuad].corners[whichCorner].y - quads[i].corners[j].y;
-                    float dist = sqrt( distx * distx + disty * disty);
-                    // to tune snapping change dist value inside next if statement
-                    if (dist < smallestDist && dist < 0.0075) {
-                        snapQuad = i;
-                        snapCorner = j;
-                        smallestDist = dist;
-                    }
-                }
-            }
-        }
-        if (snapQuad >= 0 && snapCorner >= 0) {
-            quads[activeQuad].corners[whichCorner].x = quads[snapQuad].corners[snapCorner].x;
-            quads[activeQuad].corners[whichCorner].y = quads[snapQuad].corners[snapCorner].y;
-    }
-    }
-    whichCorner = -1;
+
 }
 
 
