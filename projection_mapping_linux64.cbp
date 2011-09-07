@@ -71,6 +71,9 @@
 			<Add directory="../../../addons/ofxSimpleGuiToo/src/" />
 			<Add directory="../../../addons/ofxSimpleGuiToo/src/Controls/" />
 			<Add directory="../../../addons/ofxMSAInteractiveObject/src/" />
+			<Add directory="../../../addons/ofxMostPixelsEver/src" />
+			<Add directory="../../../addons/ofxNetwork/src" />
+			<Add directory="../../../addons/ofxThread/src" />
 		</Compiler>
 		<Linker>
 			<Add library="fmodex" />
@@ -105,6 +108,45 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxMSAInteractiveObject/src/ofxMSAInteractiveObject.h">
 			<Option virtualFolder="addons/ofxMSAInteractiveObject/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxMostPixelsEver/src/mpeClientTCP.cpp">
+			<Option virtualFolder="addons/ofxMostPixelsEver/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxMostPixelsEver/src/mpeClientTCP.h">
+			<Option virtualFolder="addons/ofxMostPixelsEver/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxMostPixelsEver/src/ofxMostPixelsEver.h">
+			<Option virtualFolder="addons/ofxMostPixelsEver/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxNetwork/src/ofxNetwork.h">
+			<Option virtualFolder="addons/ofxNetwork/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxNetwork/src/ofxNetworkUtils.h">
+			<Option virtualFolder="addons/ofxNetwork/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxNetwork/src/ofxTCPClient.cpp">
+			<Option virtualFolder="addons/ofxNetwork/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxNetwork/src/ofxTCPClient.h">
+			<Option virtualFolder="addons/ofxNetwork/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxNetwork/src/ofxTCPManager.cpp">
+			<Option virtualFolder="addons/ofxNetwork/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxNetwork/src/ofxTCPManager.h">
+			<Option virtualFolder="addons/ofxNetwork/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxNetwork/src/ofxTCPServer.cpp">
+			<Option virtualFolder="addons/ofxNetwork/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxNetwork/src/ofxTCPServer.h">
+			<Option virtualFolder="addons/ofxNetwork/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxNetwork/src/ofxUDPManager.cpp">
+			<Option virtualFolder="addons/ofxNetwork/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxNetwork/src/ofxUDPManager.h">
+			<Option virtualFolder="addons/ofxNetwork/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxSimpleGuiToo/src/Controls/ofxSimpleGuiButton.cpp">
 			<Option virtualFolder="addons/ofxSimpleGuiToo/src/Controls" />
@@ -201,6 +243,12 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxSimpleGuiToo/src/ofxSimpleGuiToo.h">
 			<Option virtualFolder="addons/ofxSimpleGuiToo/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxThread/src/ofxThread.cpp">
+			<Option virtualFolder="addons/ofxThread/src/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxThread/src/ofxThread.h">
+			<Option virtualFolder="addons/ofxThread/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">
 			<Option virtualFolder="addons/ofxXmlSettings/libs" />

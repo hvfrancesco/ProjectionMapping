@@ -14,6 +14,9 @@
 class testApp : public ofSimpleApp
 {
 
+
+
+
 public:
 
     void setup();
@@ -64,9 +67,7 @@ public:
     void getXml();
 
 private:
-
     mpeClientTCP  client;
-
 
 };
 

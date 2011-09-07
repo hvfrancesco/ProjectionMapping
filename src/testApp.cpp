@@ -10,7 +10,6 @@
 #include <vector>
 #include <string>
 
-
 using namespace std;
 
 int getdir (string dir, vector<string> &files)
@@ -41,6 +40,13 @@ void testApp::setup()
 {
     //we run at 60 fps!
     ofSetVerticalSync(true);
+
+    // setup upd client
+    std::string networkSettingsXml = "networkSettings.xml";
+    client.setup(networkSettingsXml, this, false);
+
+     // start client
+     client.start();
 
     // we scan the img dir for images
     //string imgDir = string("./data/img");
