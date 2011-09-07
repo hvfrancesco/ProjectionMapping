@@ -8,7 +8,8 @@
 #include "ball.h"
 #include "quad.h"
 #include "ofxXmlSettings.h"
-
+#include "mpeClientTCP.h"
+#include "ofxMostPixelsEver.h"
 
 class testApp : public ofSimpleApp
 {
@@ -18,6 +19,8 @@ public:
     void setup();
     void update();
     void draw();
+    // main call for MPE
+    void frameEvent();
 
 
     void keyPressed(int key);
@@ -60,7 +63,9 @@ public:
     void setXml();
     void getXml();
 
+private:
 
+    mpeClientTCP  client;
 
 
 };
